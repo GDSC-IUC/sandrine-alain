@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "../components/sections/envelope.css";
 import PetalCanvas from "@/components/ui/PetalCanvas";
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   title: "Sandrine & Alain Duclot — Mariage le 23 Janvier 2027",
@@ -33,6 +34,7 @@ export default function RootLayout({
       <body className="bg-background text-on-surface antialiased">
         <PetalCanvas />
         {children}
+        <Analytics />
       </body>
     </html>
   );
