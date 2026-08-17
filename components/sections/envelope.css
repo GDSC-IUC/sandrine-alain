@@ -1,0 +1,255 @@
+/* =========================================
+   ENVELOPPE
+========================================= */
+
+.envelope-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    background: radial-gradient(
+        ellipse at center,
+        #2a1530 0%,
+        #110a14 100%
+    );
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    transition:
+        opacity 1s ease 0.3s,
+        visibility 1s ease 0.3s;
+}
+
+/* Lorsque l'enveloppe disparaît */
+.envelope-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Conteneur de l'enveloppe */
+.envelope-wrapper {
+    width: 300px;
+    height: 210px;
+    position: relative;
+    perspective: 1000px;
+}
+
+/* Corps de l'enveloppe */
+.envelope-body {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+
+    background: linear-gradient(
+        160deg,
+        #f5e6d3,
+        #e0ccb4
+    );
+
+    border-radius: 0 0 10px 10px;
+
+    box-shadow:
+        0 15px 60px rgba(0,0,0,0.4);
+
+    overflow: hidden;
+}
+
+/* Lignes décoratives de l'enveloppe */
+.envelope-body::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to bottom right,
+            transparent 49.5%,
+            rgba(0,0,0,0.04) 50%,
+            transparent 50.5%
+        ),
+        linear-gradient(
+            to bottom left,
+            transparent 49.5%,
+            rgba(0,0,0,0.04) 50%,
+            transparent 50.5%
+        );
+}
+
+/* Rabat supérieur */
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 58%;
+
+    background: linear-gradient(
+        180deg,
+        #d9c5aa,
+        #e5d3bb
+    );
+
+    clip-path: polygon(
+        0 0,
+        50% 100%,
+        100% 0
+    );
+
+    transform-origin: top center;
+    transform-style: preserve-3d;
+
+    transition:
+        transform 1s cubic-bezier(
+            0.4,
+            0,
+            0.2,
+            1
+        );
+
+    z-index: 10;
+}
+
+/* Animation d'ouverture du rabat */
+.envelope-wrapper.opened .envelope-flap {
+    transform: rotateX(180deg);
+}
+
+/* Cachet */
+.envelope-seal {
+    position: absolute;
+
+    top: 42%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    z-index: 11;
+
+    background: radial-gradient(
+        circle,
+        #DB779B,
+        #86437E
+    );
+
+    box-shadow:
+        0 2px 10px
+        rgba(134,67,126,0.4);
+
+    transition:
+        opacity 0.3s ease 0.2s;
+}
+
+/* Texte à l'intérieur du cachet */
+.envelope-seal::after {
+    content: 'S&A';
+
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 11px;
+
+    color: white;
+    font-weight: 600;
+}
+
+/* Le cachet disparaît à l'ouverture */
+.envelope-wrapper.opened .envelope-seal {
+    opacity: 0;
+}
+
+/* Carte à l'intérieur */
+.envelope-card-inner {
+    position: absolute;
+
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+
+    background: white;
+
+    border-radius: 6px;
+
+    z-index: 5;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    transition:
+        transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s,
+        z-index 0s ease 0s;
+
+    box-shadow:
+        0 2px 15px
+        rgba(0,0,0,0.08);
+
+    padding: 16px;
+    text-align: center;
+}
+
+/* Animation : la carte sort */
+.envelope-wrapper.opened .envelope-card-inner {
+    transform: translateY(-110%);
+    z-index: 15;
+    transition:
+        transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s,
+        z-index 0s ease 0.6s;
+}
+
+/* Bouton */
+.open-btn {
+    margin-top: 40px;
+    padding: 14px 36px;
+
+    background: transparent;
+
+    border:
+        1px solid
+        rgba(219,119,155,0.5);
+
+    color: #DB779B;
+
+    font-family: 'DM Sans', Arial, sans-serif;
+    font-size: 14px;
+
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition: all 0.4s ease;
+
+    border-radius: 2px;
+}
+
+.open-btn:hover {
+    background: #DB779B;
+    color: white;
+    border-color: #DB779B;
+}
+
+/* Version mobile */
+@media (max-width: 768px) {
+    .envelope-wrapper {
+        width: 260px;
+        height: 182px;
+    }
+}

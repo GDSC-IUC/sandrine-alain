@@ -1,0 +1,322 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap');
+
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+
+/* ============================================================
+   CSS CUSTOM PROPERTIES — Design System
+   ============================================================ */
+:root {
+  --primary: #984063;
+  --primary-container: #DB779B;
+  --secondary: #7D4E7B;
+  --secondary-container: #D9A1D4;
+  --tertiary: #894681;
+  --background: #FFF8F8;
+  --surface-container: #FAEAED;
+  --on-surface: #22191C;
+  --olive: #A5A05A;
+  --plum: #86437E;
+  --blush: #F1C9CD;
+  
+  --glass-bg: rgba(255, 248, 248, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-shadow: rgba(134, 67, 126, 0.08);
+}
+
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+* {
+  box-sizing: border-box;
+}
+
+/* Failsafe for mx-auto in case Tailwind v4 ignores it */
+.mx-auto {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--background);
+  color: var(--on-surface);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar élégant */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #faeaed;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#DB779B, #7D4E7B);
+  border-radius: 9999px;
+}
+
+/* ============================================================
+   UTILITY CLASSES
+   ============================================================ */
+@layer utilities {
+  /* Glassmorphism */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px var(--glass-shadow);
+  }
+
+  .glass-dark {
+    background: rgba(134, 67, 126, 0.12);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(219, 119, 155, 0.2);
+    box-shadow: 0 8px 32px rgba(134, 67, 126, 0.15);
+  }
+
+  /* Typography */
+  .font-display {
+    font-family: 'Playfair Display', serif;
+  }
+
+  .text-gradient-rose {
+    background: linear-gradient(135deg, #DB779B, #984063);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-plum {
+    background: linear-gradient(135deg, #7D4E7B, #22191C);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Shimmer text effect */
+  .text-shimmer {
+    background: linear-gradient(
+      90deg,
+      #DB779B 0%,
+      #ffd9e3 30%,
+      #984063 50%,
+      #ffd9e3 70%,
+      #DB779B 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 4s linear infinite;
+  }
+
+  /* Boutons */
+  .btn-primary {
+    @apply px-8 py-3 rounded-full font-sans font-semibold text-white transition-all duration-300 inline-flex items-center gap-2 cursor-pointer;
+    background: linear-gradient(135deg, #DB779B, #984063);
+    box-shadow: 0 4px 20px rgba(219, 119, 155, 0.4);
+  }
+  .btn-primary:hover {
+    background: linear-gradient(135deg, #984063, #86437E);
+    box-shadow: 0 6px 28px rgba(134, 67, 126, 0.5);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    @apply px-8 py-3 rounded-full font-sans font-semibold transition-all duration-300 inline-flex items-center gap-2 cursor-pointer;
+    background: transparent;
+    border: 1px solid #D9A1D4;
+    color: #86437E;
+  }
+  .btn-secondary:hover {
+    background: rgba(217, 161, 212, 0.1);
+    border-color: #DB779B;
+    transform: translateY(-2px);
+  }
+
+  /* Section spacing */
+  .section-padding {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .section-padding {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  .container-max {
+    max-width: 1120px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Floral divider */
+  .floral-divider {
+    @apply flex items-center gap-4 justify-center my-6;
+  }
+  .floral-divider::before,
+  .floral-divider::after {
+    content: '';
+    @apply flex-1 h-[1px];
+    background: linear-gradient(90deg, transparent, #D9A1D4, transparent);
+  }
+
+  /* Floating animation */
+  .float-anim {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* Pulse glow */
+  .pulse-glow {
+    animation: pulseRose 3s ease-in-out infinite;
+  }
+}
+
+/* ============================================================
+   PETAL CANVAS — Full-page overlay
+   ============================================================ */
+#petal-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+
+
+/* ============================================================
+   TIMELINE STYLES
+   ============================================================ */
+.timeline-line {
+  background: linear-gradient(to bottom, #DB779B, #D9A1D4, #86437E);
+}
+
+.timeline-dot {
+  background: linear-gradient(135deg, #DB779B, #984063);
+  box-shadow: 0 0 0 4px rgba(219, 119, 155, 0.2);
+}
+
+/* ============================================================
+   FORM INPUTS (DESIGN.md)
+   ============================================================ */
+.wedding-input {
+  @apply w-full bg-transparent border-0 border-b pb-2 pt-6 font-sans text-body-md text-on-surface outline-none transition-all duration-300;
+  border-bottom: 1px solid rgba(134, 67, 126, 0.3);
+}
+
+.wedding-input:focus {
+  border-bottom: 2px solid #D9A1D4;
+  outline: none;
+}
+
+.wedding-input-label {
+  @apply absolute top-0 left-0 font-sans text-label-sm text-on-surface-variant uppercase tracking-wider;
+}
+
+/* ============================================================
+   GALLERY MASONRY
+   ============================================================ */
+.masonry-grid {
+  columns: 2;
+  column-gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .masonry-grid {
+    columns: 3;
+    column-gap: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .masonry-grid {
+    columns: 4;
+    column-gap: 24px;
+  }
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 16px;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .masonry-item {
+    margin-bottom: 20px;
+  }
+}
+
+/* ============================================================
+   PASS / QR FLIP CARD
+   ============================================================ */
+.pass-card {
+  perspective: 1000px;
+}
+
+.pass-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pass-card.flipped .pass-card-inner {
+  transform: rotateY(180deg);
+}
+
+.pass-card-front,
+.pass-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.pass-card-back {
+  transform: rotateY(180deg);
+}
+
+/* ============================================================
+   LEAFLET MAP OVERRIDES
+   ============================================================ */
+.leaflet-container {
+  border-radius: 1rem;
+  z-index: 1;
+}
+
+/* ============================================================
+   SCROLL ANIMATIONS (prefers-no-motion respects users)
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  #petal-canvas {
+    display: none;
+  }
+  .envelope-flap,
+  .card-reveal,
+  .float-anim,
+  .pulse-glow {
+    animation: none !important;
+    transition: none !important;
+  }
+}
