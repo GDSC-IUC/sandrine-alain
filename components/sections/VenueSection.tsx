@@ -20,7 +20,7 @@ const VENUES = [
     description: "Notre union sacrée sera célébrée à la Paroisse Sacré-Cœur. Le cocktail d'accueil se tiendra ensuite juste à côté, dans les jardins fleuris de l'église.",
     gmapQuery: "Paroisse+Sacre+Coeur+Ndiandam+Bafoussam+Cameroun",
     iconColor: "#984063",
-    iframe: "https://maps.google.com/maps?q=5.4766,10.4191&z=16&output=embed", // Defaulting to the church
+    iframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.7310524055165!2d10.4294328!3d5.457726399999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x105f91b6a54489cb%3A0xdb7f5019a7076366!2sParoisse%20Sacr%C3%A9-Coeur%20de%20Ndiandam!5e0!3m2!1sfr!2scm!4v1787254845648!5m2!1sfr!2scm",
   },
   {
     id: "soiree",
